@@ -1,0 +1,80 @@
+*{
+  box-sizing: border-box;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+}
+
+.logo {
+  color: #00ffd5;
+  font-weight: bold;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00ffd5;
+  bottom: -5px;
+  left: 0;
+  transition: 0.3s;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+/* --- fixes for link placement and underline behavior --- */
+.logo {
+  display: inline-block;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar li {
+  list-style: none;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 0.25rem 0; /* room for underline */
+}
+
+.navbar a::after {
+  width: 0;
+  bottom: 0; /* position underline at bottom of anchor */
+  transition: width 0.25s ease;
+}
+
+/* avoid page content being hidden under fixed navbar */
+body {
+  padding-top: 4.5rem; /* adjust to match navbar height if needed */
+}

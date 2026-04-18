@@ -1,0 +1,49 @@
+footer {
+  background: linear-gradient(135deg, #000, #0a0a0a);
+  color: #aaa;
+  padding: 2rem 8%;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow line animation */
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #00ffd5,
+    transparent
+  );
+  animation: glowMove 4s linear infinite;
+}
+
+@keyframes glowMove {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+footer:hover {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  footer {
+    padding: 1.5rem 5%;
+    font-size: 0.8rem;
+  }
+}
