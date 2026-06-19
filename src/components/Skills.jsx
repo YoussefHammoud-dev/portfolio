@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import '../styles/skills.css';
 
 const Skills = () => {
@@ -71,22 +71,22 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills-section">
-      <motion.div
+      <Motion.div
         className="skills-container"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.h2
+        <Motion.h2
           className="skills-title"
           variants={itemVariants}
         >
           Core Skills
-        </motion.h2>
+        </Motion.h2>
         <div className="skills-grid">
           {skillsData.map((category, index) => (
-            <motion.div
+            <Motion.div
               key={index}
               className="skills-category"
               variants={itemVariants}
@@ -94,7 +94,7 @@ const Skills = () => {
               <h3 className="category-title">{category.category}</h3>
               <div className="skills-list">
                 {category.skills.map((skill, skillIndex) => (
-                  <motion.div
+                  <Motion.div
                     key={skillIndex}
                     className="skill-item"
                     variants={itemVariants}
@@ -104,7 +104,7 @@ const Skills = () => {
                       <span className="skill-percentage">{skill.level}%</span>
                     </div>
                     <div className="progress-bar">
-                      <motion.div
+                      <Motion.div
                         className="progress-fill"
                         variants={progressVariants}
                         custom={skill.level}
@@ -113,13 +113,13 @@ const Skills = () => {
                         viewport={{ once: true }}
                       />
                     </div>
-                  </motion.div>
+                  </Motion.div>
                 ))}
               </div>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
-      </motion.div>
+      </Motion.div>
     </section>
   );
 };

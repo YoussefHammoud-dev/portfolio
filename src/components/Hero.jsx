@@ -4,7 +4,7 @@ import heroImage from "../assets/heroImg.jpeg";
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       <div className="hero-content">
         <h1>
           Junior Full-Stack Developer <span>Youssef Hammoud</span>

@@ -1,80 +1,271 @@
-*{
+* {
   box-sizing: border-box;
 }
-.navbar {
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding-top: 76px;
+  background: #000;
+}
+
+[id] {
+  scroll-margin-top: 92px;
+}
+
+.site-header {
   position: fixed;
   top: 0;
-  width: 100%;
-  padding: 1rem 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.6);
-  z-index: 1000;
-}
-
-.logo {
-  color: #00ffd5;
-  font-weight: bold;
-}
-
-.navbar ul {
-  display: flex;
-  gap: 2rem;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  position: relative;
-}
-
-.navbar a::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: #00ffd5;
-  bottom: -5px;
   left: 0;
-  transition: 0.3s;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(3, 8, 10, 0.76);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
-.navbar a:hover::after {
-  width: 100%;
+.navbar {
+  width: min(100%, 1440px);
+  min-height: 76px;
+  margin: 0 auto;
+  padding: 0 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
 }
 
-/* --- fixes for link placement and underline behavior --- */
-.logo {
-  display: inline-block;
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0;
 }
 
-.navbar ul {
+.navbar__brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(0, 255, 213, 0.55);
+  border-radius: 8px;
+  background: rgba(0, 255, 213, 0.1);
+  color: #00ffd5;
+  font-size: 0.95rem;
+  box-shadow: 0 0 22px rgba(0, 255, 213, 0.18);
+}
+
+.navbar__brand-text {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  color: #00ffd5;
+}
+
+.navbar__links {
   margin: 0;
   padding: 0;
-  list-style: none;
   display: flex;
-  gap: 2rem;
   align-items: center;
-}
-
-.navbar li {
+  justify-content: flex-end;
+  gap: clamp(0.75rem, 2vw, 2rem);
   list-style: none;
 }
 
-.navbar a {
-  display: inline-block;
-  padding: 0.25rem 0; /* room for underline */
+.navbar__links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0;
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+  font-size: clamp(0.92rem, 1.4vw, 1rem);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.25s ease;
 }
 
-.navbar a::after {
-  width: 0;
-  bottom: 0; /* position underline at bottom of anchor */
-  transition: width 0.25s ease;
+.navbar__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: #00ffd5;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
 }
 
-/* avoid page content being hidden under fixed navbar */
-body {
-  padding-top: 4.5rem; /* adjust to match navbar height if needed */
+.navbar__links a:hover,
+.navbar__links a:focus-visible {
+  color: #ffffff;
+}
+
+.navbar__links a:hover::after,
+.navbar__links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.navbar__brand:focus-visible,
+.navbar__toggle:focus-visible,
+.navbar__links a:focus-visible {
+  outline: 3px solid rgba(0, 255, 213, 0.45);
+  outline-offset: 4px;
+}
+
+.navbar__toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  cursor: pointer;
+  place-items: center;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.navbar__toggle:hover {
+  border-color: rgba(0, 255, 213, 0.6);
+  background: rgba(0, 255, 213, 0.1);
+}
+
+.navbar__toggle span {
+  width: 20px;
+  height: 2px;
+  display: block;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.navbar__toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (min-width: 1280px) {
+  .navbar {
+    padding-inline: 7rem;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    padding-top: 68px;
+  }
+
+  [id] {
+    scroll-margin-top: 84px;
+  }
+
+  .navbar {
+    min-height: 68px;
+    padding-inline: 5%;
+  }
+
+  .navbar__toggle {
+    display: grid;
+    gap: 5px;
+  }
+
+  .navbar__links {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 5%;
+    right: 5%;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(8, 14, 16, 0.97);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .navbar__links--open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .navbar__links a {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+  }
+
+  .navbar__links a::after {
+    display: none;
+  }
+
+  .navbar__links a:hover,
+  .navbar__links a:focus-visible {
+    background: rgba(0, 255, 213, 0.1);
+    color: #00ffd5;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 64px;
+  }
+
+  .navbar {
+    min-height: 64px;
+    padding-inline: 1rem;
+  }
+
+  .navbar__brand-mark {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .navbar__brand-text {
+    font-size: 1.05rem;
+  }
+
+  .navbar__links {
+    left: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .navbar__links,
+  .navbar__links a,
+  .navbar__links a::after,
+  .navbar__toggle,
+  .navbar__toggle span {
+    transition: none;
+  }
 }
